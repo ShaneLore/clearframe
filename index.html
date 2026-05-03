@@ -4,39 +4,548 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clearframe Systems</title>
+  <meta
+    name="description"
+    content="Clearframe Systems helps teams move from manual testing to modern, automated software practices through strong foundations, guidance, and bespoke tooling."
+  />
   <style>
+    :root {
+      --bg: #050608;
+      --panel: rgba(255, 255, 255, 0.055);
+      --panel-strong: rgba(255, 255, 255, 0.09);
+      --text: #f5f5f3;
+      --muted: #b9bbb8;
+      --line: rgba(255, 255, 255, 0.18);
+      --accent: #d9f99d;
+      --accent-soft: rgba(217, 249, 157, 0.14);
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0f172a;
-      color: #e5e7eb;
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(217, 249, 157, 0.08), transparent 28%),
+        radial-gradient(circle at 85% 25%, rgba(148, 163, 184, 0.12), transparent 30%),
+        linear-gradient(135deg, #050608 0%, #0d1117 52%, #050608 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black, transparent 75%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(5, 6, 8, 0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      min-height: 86px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 750;
+      letter-spacing: -0.04em;
+      font-size: clamp(1.25rem, 2vw, 1.65rem);
+    }
+
+    .mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      box-shadow: 0 14px 45px var(--shadow);
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: var(--panel);
+    }
+
+    .hero {
+      min-height: calc(100vh - 86px);
+      display: grid;
+      align-items: center;
+      padding: 86px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 54px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: var(--panel);
+      font-size: 0.92rem;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 22px var(--accent);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 850px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      line-height: 0.95;
+      font-size: clamp(4rem, 9vw, 7.8rem);
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.8vw, 1.32rem);
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.38);
+    }
+
+    .button.primary {
+      background: var(--text);
+      color: #050608;
+      border-color: var(--text);
+    }
+
+    .button.secondary {
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: linear-gradient(180deg, var(--panel-strong), rgba(255,255,255,0.035));
+      box-shadow: 0 28px 90px var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card {
+      padding: 28px;
+    }
+
+    .hero-card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 26px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+    }
+
+    .status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .hero-card h2 {
+      margin: 30px 0 16px;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: -0.05em;
+      line-height: 1.08;
+    }
+
+    .hero-card p {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 1.02rem;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .metric {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.11);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.55rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    section {
+      padding: 80px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: -0.06em;
+      line-height: 0.98;
+    }
+
+    .section-heading p {
+      max-width: 440px;
+      color: var(--muted);
+      line-height: 1.65;
       margin: 0;
     }
-    .container {
-      max-width: 600px;
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      padding: 26px;
+      min-height: 260px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .service-card .number {
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 38px;
+      display: block;
+    }
+
+    .service-card h3 {
+      margin: 0 0 14px;
+      font-size: 1.35rem;
+      letter-spacing: -0.04em;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .cta {
       text-align: center;
+      padding: 70px 32px;
+      border-radius: 36px;
+      background: linear-gradient(135deg, var(--accent-soft), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
     }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+
+    .cta h2 {
+      margin: 0 auto 18px;
+      max-width: 820px;
+      font-size: clamp(2.1rem, 5vw, 4.7rem);
+      letter-spacing: -0.06em;
+      line-height: 0.98;
     }
-    p {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      opacity: 0.8;
+
+    .cta p {
+      max-width: 620px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      padding: 34px 0 46px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        display: none;
+      }
+
+      .hero-grid,
+      .cards,
+      .section-heading {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+
+      .hero-card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: clamp(3.2rem, 18vw, 4.3rem);
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Clearframe Systems</h1>
-    <p>
-      We help teams transition to modern, automated software practices
-      by setting clear foundations and providing the tools to scale with confidence.
-    </p>
-  </div>
+  <header>
+    <div class="page nav">
+      <a class="brand" href="#top" aria-label="Clearframe Systems home">
+        <span class="mark">Cf</span>
+        <span>Clearframe</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="mailto:shane@clearframesystems.co.uk" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero page" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Software quality, automation, and delivery foundations</div>
+          <h1 id="hero-title">Clear systems. Confident teams.</h1>
+          <p class="hero-copy">
+            Clearframe helps teams move from manual processes to modern, automated software practices by setting strong foundations, providing clear guidance, and building tools that support sustainable growth.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="mailto:shane@clearframesystems.co.uk">Start a conversation</a>
+            <a class="button secondary" href="#services">Explore services</a>
+          </div>
+        </div>
+
+        <aside class="panel hero-card" aria-label="Clearframe overview">
+          <div class="hero-card-top">
+            <span>Clearframe Systems</span>
+            <span class="status">Available for consultancy</span>
+          </div>
+          <h2>Modern foundations for teams ready to grow beyond manual testing.</h2>
+          <p>
+            From framework setup and quality strategy to bespoke tooling and enablement, Clearframe is built for startups and teams who want practical, logical, maintainable ways of working.
+          </p>
+          <div class="metrics">
+            <div class="metric">
+              <strong>QA</strong>
+              <span>Manual to automation transition</span>
+            </div>
+            <div class="metric">
+              <strong>Dev</strong>
+              <span>Software and tool development</span>
+            </div>
+            <div class="metric">
+              <strong>Nero</strong>
+              <span>Bespoke testing and workflow tools</span>
+            </div>
+            <div class="metric">
+              <strong>SC</strong>
+              <span>Security cleared experience</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="page section-heading">
+        <h2>Built for clarity before scale.</h2>
+        <p>
+          We focus on giving teams a sustainable baseline: clear processes, reliable automation, sensible tooling, and the confidence to keep improving after the engagement ends.
+        </p>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="page">
+        <div class="section-heading">
+          <h2>Services</h2>
+          <p>Practical support across software delivery, quality engineering, enablement, and bespoke internal tooling.</p>
+        </div>
+
+        <div class="cards">
+          <article class="service-card">
+            <span class="number">01</span>
+            <h3>Quality Assurance</h3>
+            <p>Testing strategy, manual QA structure, automation readiness, regression planning, and practical delivery confidence.</p>
+          </article>
+
+          <article class="service-card">
+            <span class="number">02</span>
+            <h3>Automation Foundations</h3>
+            <p>Initial Playwright, TypeScript, and BDD-style framework setup designed to be maintainable, readable, and usable by real teams.</p>
+          </article>
+
+          <article class="service-card">
+            <span class="number">03</span>
+            <h3>Tools & Enablement</h3>
+            <p>Bespoke test management and project workflow tools, including Nero-powered suite creation and Kanban-style delivery systems.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="page">
+        <div class="cta">
+          <h2>Ready to move from uncertainty to structure?</h2>
+          <p>
+            Whether you need a testing foundation, automation guidance, or bespoke tooling, Clearframe can help you establish a cleaner way forward.
+          </p>
+          <a class="button primary" href="mailto:shane@clearframesystems.co.uk">Contact Clearframe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page footer-inner">
+      <span>© 2026 Clearframe Systems</span>
+      <a href="mailto:shane@clearframesystems.co.uk">shane@clearframesystems.co.uk</a>
+    </div>
+  </footer>
 </body>
 </html>
