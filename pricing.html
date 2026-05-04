@@ -2,11 +2,10 @@
 File suggestion: pricing.html
 
 Index nav addition:
-Add this beside About / Services / Contact in your index.html nav:
+Add this beside About / Services in your index.html nav:
 <a href="pricing.html">Pricing</a>
 
-Optional services CTA addition:
-<a class="button secondary" href="pricing.html">View pricing guidance</a>
+If your Contact link is styled as a pill button, keep that exact class on the Contact anchor.
 -->
 
 <!DOCTYPE html>
@@ -17,23 +16,27 @@ Optional services CTA addition:
   <title>Pricing | Clearframe Systems</title>
   <meta
     name="description"
-    content="Clearframe Systems pricing guidance for QA strategy, automation foundations, scalable Playwright frameworks, and ongoing quality engineering support."
+    content="Clearframe Systems pricing guidance for QA strategy, scalable Playwright test automation frameworks, and ongoing quality engineering support."
   />
 
   <style>
     :root {
-      --bg: #090b10;
-      --panel: #10141d;
-      --panel-soft: #151b26;
-      --text: #f4f7fb;
-      --muted: #a8b3c4;
-      --line: rgba(255, 255, 255, 0.10);
-      --accent: #f59e0b;
-      --accent-soft: rgba(245, 158, 11, 0.12);
-      --accent-line: rgba(245, 158, 11, 0.35);
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
-      --radius: 22px;
-      --max: 1120px;
+      --bg: #07080a;
+      --bg-grid: rgba(255, 255, 255, 0.035);
+      --surface: #0d0f12;
+      --surface-soft: #12151a;
+      --surface-lift: #171b21;
+      --text: #f5f5f2;
+      --muted: #a7a7a2;
+      --muted-strong: #c6c6bf;
+      --line: rgba(255, 255, 255, 0.13);
+      --line-strong: rgba(255, 255, 255, 0.22);
+      --accent: #d8ff8f;
+      --accent-soft: rgba(216, 255, 143, 0.11);
+      --accent-line: rgba(216, 255, 143, 0.32);
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.44);
+      --radius: 24px;
+      --max: 1200px;
     }
 
     * {
@@ -48,9 +51,17 @@ Optional services CTA addition:
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(245, 158, 11, 0.13), transparent 34rem),
-        radial-gradient(circle at top right, rgba(88, 111, 155, 0.18), transparent 30rem),
+        linear-gradient(var(--bg-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px),
+        radial-gradient(circle at 14% 6%, rgba(216, 255, 143, 0.10), transparent 30rem),
+        radial-gradient(circle at 88% 20%, rgba(255, 255, 255, 0.045), transparent 26rem),
         var(--bg);
+      background-size:
+        68px 68px,
+        68px 68px,
+        auto,
+        auto,
+        auto;
       color: var(--text);
       line-height: 1.6;
     }
@@ -63,48 +74,71 @@ Optional services CTA addition:
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
+      background: rgba(7, 8, 10, 0.92);
       backdrop-filter: blur(18px);
-      background: rgba(9, 11, 16, 0.74);
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--line-strong);
     }
 
     .nav {
-      max-width: var(--max);
+      max-width: none;
       margin: 0 auto;
-      padding: 18px 22px;
+      padding: 28px clamp(24px, 4.5vw, 88px);
+      min-height: 134px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 32px;
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      gap: 22px;
+      min-width: 0;
     }
 
     .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
+      width: 70px;
+      height: 70px;
+      flex: 0 0 70px;
+      border-radius: 22px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, var(--accent), #f97316);
-      color: #111827;
+      background: #15171b;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 14px 38px rgba(0, 0, 0, 0.30);
+      color: var(--accent);
+      font-size: 2.05rem;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.08em;
+    }
+
+    .brand-text {
+      color: var(--text);
+      font-size: clamp(2rem, 2.4vw, 2.65rem);
       font-weight: 800;
-      box-shadow: 0 12px 32px rgba(245, 158, 11, 0.22);
+      letter-spacing: -0.075em;
+      line-height: 1;
+      white-space: nowrap;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 22px;
-      color: var(--muted);
-      font-size: 0.96rem;
+      justify-content: flex-end;
+      gap: clamp(24px, 3.2vw, 48px);
+      color: var(--muted-strong);
+      font-size: clamp(1rem, 1.18vw, 1.45rem);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-links a {
+      transition: color 160ms ease, border-color 160ms ease, background 160ms ease, transform 160ms ease;
     }
 
     .nav-links a:hover,
@@ -112,18 +146,37 @@ Optional services CTA addition:
       color: var(--text);
     }
 
+    .nav-contact {
+      min-height: 70px;
+      padding: 0 31px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: var(--text) !important;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.035);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    }
+
+    .nav-contact:hover {
+      transform: translateY(-1px);
+      border-color: rgba(216, 255, 143, 0.42);
+      background: rgba(216, 255, 143, 0.07);
+    }
+
     main {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 74px 22px 46px;
+      padding: 92px 24px 56px;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-      gap: 34px;
+      grid-template-columns: minmax(0, 1.18fr) minmax(300px, 0.82fr);
+      gap: 32px;
       align-items: stretch;
-      margin-bottom: 52px;
+      margin-bottom: 64px;
     }
 
     .eyebrow {
@@ -131,36 +184,37 @@ Optional services CTA addition:
       align-items: center;
       gap: 9px;
       width: fit-content;
-      padding: 8px 12px;
+      padding: 9px 13px;
       border-radius: 999px;
       background: var(--accent-soft);
-      color: #fbbf24;
+      color: var(--accent);
       border: 1px solid var(--accent-line);
-      font-size: 0.88rem;
-      margin-bottom: 22px;
+      font-size: 0.9rem;
+      font-weight: 750;
+      margin-bottom: 24px;
     }
 
     h1,
     h2,
     h3 {
       margin: 0;
-      line-height: 1.08;
-      letter-spacing: -0.045em;
+      line-height: 1.06;
+      letter-spacing: -0.06em;
     }
 
     h1 {
-      font-size: clamp(2.6rem, 6vw, 5.2rem);
-      max-width: 850px;
+      font-size: clamp(3rem, 6.7vw, 6.35rem);
+      max-width: 900px;
     }
 
     h2 {
-      font-size: clamp(2rem, 3.5vw, 3.1rem);
-      margin-bottom: 16px;
+      font-size: clamp(2.15rem, 3.8vw, 3.8rem);
+      margin-bottom: 18px;
     }
 
     h3 {
-      font-size: 1.28rem;
-      letter-spacing: -0.025em;
+      font-size: 1.35rem;
+      letter-spacing: -0.035em;
     }
 
     p {
@@ -169,26 +223,27 @@ Optional services CTA addition:
     }
 
     .hero-copy p {
-      max-width: 760px;
-      margin-top: 22px;
-      font-size: 1.14rem;
+      max-width: 780px;
+      margin-top: 24px;
+      font-size: clamp(1.08rem, 1.35vw, 1.28rem);
+      color: var(--muted-strong);
     }
 
     .actions {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 30px;
+      margin-top: 34px;
     }
 
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 46px;
-      padding: 0 18px;
+      min-height: 52px;
+      padding: 0 20px;
       border-radius: 999px;
-      font-weight: 700;
+      font-weight: 800;
       border: 1px solid transparent;
       transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
     }
@@ -199,12 +254,12 @@ Optional services CTA addition:
 
     .button.primary {
       background: var(--accent);
-      color: #111827;
-      box-shadow: 0 14px 38px rgba(245, 158, 11, 0.22);
+      color: #090b10;
+      box-shadow: 0 16px 42px rgba(216, 255, 143, 0.13);
     }
 
     .button.secondary {
-      border-color: var(--line);
+      border-color: var(--line-strong);
       color: var(--text);
       background: rgba(255, 255, 255, 0.035);
     }
@@ -213,27 +268,27 @@ Optional services CTA addition:
     .card,
     .note-panel,
     .cta-panel {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.022));
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
 
     .summary-card {
-      padding: 28px;
+      padding: 30px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 24px;
+      gap: 26px;
     }
 
     .summary-card strong {
       display: block;
-      font-size: 2.25rem;
-      letter-spacing: -0.055em;
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      letter-spacing: -0.07em;
       line-height: 1;
       color: var(--text);
-      margin-bottom: 10px;
+      margin-bottom: 11px;
     }
 
     .summary-card span {
@@ -241,12 +296,14 @@ Optional services CTA addition:
     }
 
     .section {
-      margin-top: 56px;
+      margin-top: 64px;
     }
 
     .section-intro {
-      max-width: 760px;
-      margin-bottom: 24px;
+      max-width: 780px;
+      margin-bottom: 26px;
+      color: var(--muted-strong);
+      font-size: 1.05rem;
     }
 
     .grid {
@@ -263,14 +320,14 @@ Optional services CTA addition:
     }
 
     .card {
-      padding: 24px;
+      padding: 26px;
       min-height: 100%;
     }
 
     .card.featured {
       border-color: var(--accent-line);
       background:
-        linear-gradient(180deg, rgba(245, 158, 11, 0.105), rgba(255, 255, 255, 0.025));
+        linear-gradient(180deg, rgba(216, 255, 143, 0.09), rgba(255, 255, 255, 0.024));
     }
 
     .card-header {
@@ -278,41 +335,41 @@ Optional services CTA addition:
       align-items: flex-start;
       justify-content: space-between;
       gap: 18px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .badge {
       flex: 0 0 auto;
-      padding: 6px 10px;
+      padding: 7px 11px;
       border-radius: 999px;
       background: var(--accent-soft);
-      color: #fbbf24;
+      color: var(--accent);
       border: 1px solid var(--accent-line);
       font-size: 0.78rem;
-      font-weight: 700;
+      font-weight: 800;
       white-space: nowrap;
     }
 
     .price {
-      margin-top: 18px;
-      font-size: 2rem;
+      margin-top: 20px;
+      font-size: 2.15rem;
       line-height: 1;
-      font-weight: 800;
-      letter-spacing: -0.055em;
+      font-weight: 900;
+      letter-spacing: -0.07em;
       color: var(--text);
     }
 
     .price span {
       font-size: 0.98rem;
       color: var(--muted);
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0;
     }
 
     ul {
       list-style: none;
       padding: 0;
-      margin: 20px 0 0;
+      margin: 22px 0 0;
       display: grid;
       gap: 10px;
     }
@@ -332,7 +389,7 @@ Optional services CTA addition:
       height: 8px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.10);
+      box-shadow: 0 0 0 5px rgba(216, 255, 143, 0.10);
     }
 
     .rate-table {
@@ -346,7 +403,7 @@ Optional services CTA addition:
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.8fr) minmax(130px, 0.45fr);
       gap: 18px;
-      padding: 18px 20px;
+      padding: 19px 22px;
       border-bottom: 1px solid var(--line);
       align-items: center;
     }
@@ -366,37 +423,33 @@ Optional services CTA addition:
 
     .rate-row .amount {
       color: var(--text);
-      font-weight: 800;
+      font-weight: 900;
       text-align: right;
       white-space: nowrap;
     }
 
     .note-panel {
-      padding: 24px;
+      padding: 26px;
       border-style: dashed;
       box-shadow: none;
     }
 
-    .note-panel p + p {
-      margin-top: 12px;
-    }
-
     .cta-panel {
-      margin-top: 56px;
-      padding: clamp(28px, 5vw, 48px);
+      margin-top: 64px;
+      padding: clamp(30px, 5vw, 52px);
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
       gap: 24px;
       background:
-        radial-gradient(circle at top right, rgba(245, 158, 11, 0.20), transparent 24rem),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+        radial-gradient(circle at top right, rgba(216, 255, 143, 0.16), transparent 24rem),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
     }
 
     footer {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 24px 22px 42px;
+      padding: 26px 24px 46px;
       color: var(--muted);
       border-top: 1px solid var(--line);
       display: flex;
@@ -409,7 +462,34 @@ Optional services CTA addition:
       color: var(--text);
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 980px) {
+      .nav {
+        min-height: auto;
+        padding: 24px;
+      }
+
+      .brand-mark {
+        width: 56px;
+        height: 56px;
+        flex-basis: 56px;
+        border-radius: 17px;
+        font-size: 1.65rem;
+      }
+
+      .brand-text {
+        font-size: 2rem;
+      }
+
+      .nav-links {
+        gap: 18px;
+        font-size: 1rem;
+      }
+
+      .nav-contact {
+        min-height: 52px;
+        padding: 0 20px;
+      }
+
       .hero,
       .grid.two,
       .grid.three,
@@ -427,19 +507,25 @@ Optional services CTA addition:
       }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 700px) {
       .nav {
         align-items: flex-start;
         flex-direction: column;
+        gap: 22px;
       }
 
       .nav-links {
+        width: 100%;
         flex-wrap: wrap;
-        gap: 14px;
+        justify-content: flex-start;
+      }
+
+      .nav-contact {
+        min-height: 46px;
       }
 
       main {
-        padding-top: 52px;
+        padding-top: 58px;
       }
     }
   </style>
@@ -450,14 +536,14 @@ Optional services CTA addition:
     <nav class="nav" aria-label="Main navigation">
       <a class="brand" href="index.html" aria-label="Clearframe Systems home">
         <span class="brand-mark">Cf</span>
-        <span>Clearframe</span>
+        <span class="brand-text">Clearframe</span>
       </a>
 
       <div class="nav-links">
         <a href="index.html#about">About</a>
         <a href="index.html#services">Services</a>
         <a href="pricing.html" aria-current="page">Pricing</a>
-        <a href="mailto:shane@clearframesystems.co.uk">Contact</a>
+        <a class="nav-contact" href="mailto:shane@clearframesystems.co.uk">Contact</a>
       </div>
     </nav>
   </header>
