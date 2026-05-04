@@ -69,11 +69,10 @@
       margin: 0 auto;
     }
 
-    /* Homepage-identical navbar */
     header {
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
       backdrop-filter: blur(18px);
       background: rgba(5, 6, 8, 0.72);
       border-bottom: 1px solid var(--line);
@@ -84,6 +83,8 @@
       align-items: center;
       justify-content: space-between;
       min-height: 86px;
+      position: relative;
+      gap: 20px;
     }
 
     .brand {
@@ -93,6 +94,7 @@
       font-weight: 750;
       letter-spacing: -0.04em;
       font-size: clamp(1.25rem, 2vw, 1.65rem);
+      z-index: 2;
     }
 
     .mark {
@@ -108,7 +110,7 @@
       color: var(--accent);
     }
 
-    nav {
+    .site-nav {
       display: flex;
       align-items: center;
       gap: 30px;
@@ -116,8 +118,8 @@
       font-size: 0.96rem;
     }
 
-    nav a:hover,
-    nav a[aria-current="page"] {
+    .site-nav a:hover,
+    .site-nav a[aria-current="page"] {
       color: var(--text);
     }
 
@@ -127,6 +129,41 @@
       border-radius: 999px;
       color: var(--text);
       background: var(--panel);
+    }
+
+    .mobile-menu-button {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: var(--panel);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .mobile-menu-button span:last-child {
+      width: 16px;
+      height: 11px;
+      position: relative;
+      display: inline-block;
+      border-top: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .mobile-menu-button span:last-child::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 3.5px;
+      border-top: 2px solid var(--accent);
     }
 
     main {
@@ -439,8 +476,44 @@
     }
 
     @media (max-width: 900px) {
-      nav {
-        display: none;
+      .mobile-menu-button {
+        display: inline-flex;
+      }
+
+      .site-nav {
+        position: absolute;
+        top: calc(100% - 8px);
+        left: 0;
+        right: 0;
+        display: grid;
+        gap: 10px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: rgba(5, 6, 8, 0.96);
+        box-shadow: 0 28px 90px var(--shadow);
+        transform-origin: top;
+        transform: scaleY(0.96);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 160ms ease, transform 160ms ease;
+      }
+
+      .site-nav.is-open {
+        transform: scaleY(1);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .site-nav a {
+        padding: 13px 14px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .site-nav .nav-cta {
+        text-align: center;
+        border-radius: 14px;
       }
 
       .pricing-hero,
@@ -467,12 +540,33 @@
         width: min(100% - 24px, 1180px);
       }
 
+      .nav {
+        min-height: 76px;
+      }
+
+      .brand {
+        font-size: 1.22rem;
+      }
+
+      .mark {
+        width: 40px;
+        height: 40px;
+      }
+
+      main {
+        padding-top: 54px;
+      }
+
       .actions {
         flex-direction: column;
       }
 
       .button {
         width: 100%;
+      }
+
+      .card-header {
+        flex-direction: column;
       }
     }
   </style>
@@ -484,7 +578,13 @@
         <span class="mark">Cf</span>
         <span>Clearframe</span>
       </a>
-      <nav aria-label="Main navigation">
+
+      <button class="mobile-menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span>Menu</span>
+        <span aria-hidden="true"></span>
+      </button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
         <a href="index.html#about">About</a>
         <a href="index.html#services">Services</a>
         <a href="pricing.html" aria-current="page">Pricing</a>
@@ -744,8 +844,9 @@
   <footer>
     <span>© 2026 Clearframe Systems</span>
     <a href="mailto:shane@clearframesystems.co.uk">shane@clearframesystems.co.uk</a>
-      </footer>
-      <script>
+  </footer>
+
+  <script>
     const menuButton = document.querySelector('.mobile-menu-button');
     const siteNav = document.querySelector('#site-nav');
 
