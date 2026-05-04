@@ -1,0 +1,719 @@
+<!--
+File suggestion: pricing.html
+
+Index nav addition:
+Add this beside About / Services / Contact in your index.html nav:
+<a href="pricing.html">Pricing</a>
+
+Optional services CTA addition:
+<a class="button secondary" href="pricing.html">View pricing guidance</a>
+-->
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing | Clearframe Systems</title>
+  <meta
+    name="description"
+    content="Clearframe Systems pricing guidance for QA strategy, automation foundations, scalable Playwright frameworks, and ongoing quality engineering support."
+  />
+
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: #10141d;
+      --panel-soft: #151b26;
+      --text: #f4f7fb;
+      --muted: #a8b3c4;
+      --line: rgba(255, 255, 255, 0.10);
+      --accent: #f59e0b;
+      --accent-soft: rgba(245, 158, 11, 0.12);
+      --accent-line: rgba(245, 158, 11, 0.35);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(245, 158, 11, 0.13), transparent 34rem),
+        radial-gradient(circle at top right, rgba(88, 111, 155, 0.18), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(9, 11, 16, 0.74);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), #f97316);
+      color: #111827;
+      font-weight: 800;
+      box-shadow: 0 12px 32px rgba(245, 158, 11, 0.22);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
+      color: var(--text);
+    }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 74px 22px 46px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: 34px;
+      align-items: stretch;
+      margin-bottom: 52px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #fbbf24;
+      border: 1px solid var(--accent-line);
+      font-size: 0.88rem;
+      margin-bottom: 22px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 5.2rem);
+      max-width: 850px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3.5vw, 3.1rem);
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-size: 1.28rem;
+      letter-spacing: -0.025em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .hero-copy p {
+      max-width: 760px;
+      margin-top: 22px;
+      font-size: 1.14rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #111827;
+      box-shadow: 0 14px 38px rgba(245, 158, 11, 0.22);
+    }
+
+    .button.secondary {
+      border-color: var(--line);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .summary-card,
+    .card,
+    .note-panel,
+    .cta-panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .summary-card strong {
+      display: block;
+      font-size: 2.25rem;
+      letter-spacing: -0.055em;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .summary-card span {
+      color: var(--muted);
+    }
+
+    .section {
+      margin-top: 56px;
+    }
+
+    .section-intro {
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 24px;
+      min-height: 100%;
+    }
+
+    .card.featured {
+      border-color: var(--accent-line);
+      background:
+        linear-gradient(180deg, rgba(245, 158, 11, 0.105), rgba(255, 255, 255, 0.025));
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #fbbf24;
+      border: 1px solid var(--accent-line);
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .price {
+      margin-top: 18px;
+      font-size: 2rem;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.055em;
+      color: var(--text);
+    }
+
+    .price span {
+      font-size: 0.98rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    li {
+      position: relative;
+      padding-left: 24px;
+      color: var(--muted);
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.68em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.10);
+    }
+
+    .rate-table {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .rate-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.8fr) minmax(130px, 0.45fr);
+      gap: 18px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      align-items: center;
+    }
+
+    .rate-row:last-child {
+      border-bottom: 0;
+    }
+
+    .rate-row strong {
+      color: var(--text);
+    }
+
+    .rate-row span,
+    .rate-row p {
+      color: var(--muted);
+    }
+
+    .rate-row .amount {
+      color: var(--text);
+      font-weight: 800;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .note-panel {
+      padding: 24px;
+      border-style: dashed;
+      box-shadow: none;
+    }
+
+    .note-panel p + p {
+      margin-top: 12px;
+    }
+
+    .cta-panel {
+      margin-top: 56px;
+      padding: clamp(28px, 5vw, 48px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(245, 158, 11, 0.20), transparent 24rem),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+    }
+
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px 22px 42px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: var(--text);
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .grid.two,
+      .grid.three,
+      .cta-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .rate-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .rate-row .amount {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      main {
+        padding-top: 52px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="Clearframe Systems home">
+        <span class="brand-mark">Cf</span>
+        <span>Clearframe</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#services">Services</a>
+        <a href="pricing.html" aria-current="page">Pricing</a>
+        <a href="mailto:shane@clearframesystems.co.uk">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <div class="eyebrow">Pricing guidance</div>
+        <h1 id="page-title">Clear pricing for stronger QA and scalable automation.</h1>
+        <p>
+          Clearframe prices framework delivery as quality architecture, implementation, and enablement — not simply as test scripting. Engagements are shaped around the size of the product, the maturity of the team, and the amount of coverage, CI, documentation, and handover required.
+        </p>
+
+        <div class="actions">
+          <a class="button primary" href="mailto:shane@clearframesystems.co.uk?subject=Clearframe%20pricing%20conversation">Start a pricing conversation</a>
+          <a class="button secondary" href="#packages">Explore packages</a>
+        </div>
+      </div>
+
+      <aside class="summary-card" aria-label="Typical engagement summary">
+        <div>
+          <strong>From £8,000</strong>
+          <span>for a scalable Playwright / TypeScript automation framework.</span>
+        </div>
+        <div>
+          <strong>£650/day</strong>
+          <span>standard Clearframe delivery rate for automation and QA implementation.</span>
+        </div>
+        <div>
+          <strong>£15k–£25k+</strong>
+          <span>typical range when the framework includes a meaningful first regression pack.</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="principles-title">
+      <h2 id="principles-title">Priced around outcomes, not noise.</h2>
+      <p class="section-intro">
+        A sustainable automation framework should give your team confidence long after the first tests are written. Clearframe focuses on structure, maintainability, reporting, sensible test data handling, and clean adoption by the people who will use the framework day to day.
+      </p>
+
+      <div class="grid three">
+        <article class="card">
+          <h3>Architecture first</h3>
+          <p>
+            Frameworks are designed around real delivery needs: environments, authentication, selectors, fixtures, tagging, reporting, and long-term maintenance.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Practical implementation</h3>
+          <p>
+            The goal is not a theoretical testing strategy. The goal is a usable foundation your team can run, extend, debug, and trust.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Clear handover</h3>
+          <p>
+            Documentation, walkthroughs, and working examples are included so the framework does not become a black box after delivery.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="packages" aria-labelledby="packages-title">
+      <h2 id="packages-title">Framework and QA packages.</h2>
+      <p class="section-intro">
+        These ranges are designed to give teams a realistic starting point. Final pricing depends on application complexity, number of environments, authentication model, CI requirements, test data constraints, and the amount of regression coverage required.
+      </p>
+
+      <div class="grid two">
+        <article class="card">
+          <div class="card-header">
+            <h3>QA / Automation Readiness Review</h3>
+            <span class="badge">Entry point</span>
+          </div>
+          <p>
+            A focused review for teams who know quality needs improving, but are not yet sure whether the next move is automation, process cleanup, or better regression structure.
+          </p>
+          <div class="price">From £500</div>
+          <ul>
+            <li>QA process and regression review</li>
+            <li>Automation readiness assessment</li>
+            <li>Manual vs automated coverage guidance</li>
+            <li>Practical next-step recommendations</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <h3>Automation Foundation Sprint</h3>
+            <span class="badge">Starter build</span>
+          </div>
+          <p>
+            A clean starting point for teams introducing Playwright and TypeScript automation without overcomplicating the first version.
+          </p>
+          <div class="price">£4,000–£6,000</div>
+          <ul>
+            <li>Framework skeleton and project structure</li>
+            <li>Environment configuration approach</li>
+            <li>Example smoke tests</li>
+            <li>Basic reporting and documentation</li>
+          </ul>
+        </article>
+
+        <article class="card featured">
+          <div class="card-header">
+            <h3>Scalable Playwright Framework</h3>
+            <span class="badge">Core offer</span>
+          </div>
+          <p>
+            A fuller automation framework for teams that need maintainability, clearer standards, better diagnostics, and a foundation they can scale with confidence.
+          </p>
+          <div class="price">£8,000–£15,000</div>
+          <ul>
+            <li>Playwright / TypeScript framework architecture</li>
+            <li>Fixtures, helpers, selectors, and page object patterns</li>
+            <li>Smoke and regression structure</li>
+            <li>CI guidance, reporting, and handover documentation</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <h3>Framework + First Regression Pack</h3>
+            <span class="badge">Release confidence</span>
+          </div>
+          <p>
+            Framework delivery plus meaningful first coverage across high-value user journeys, designed to give the team a practical regression baseline.
+          </p>
+          <div class="price">£15,000–£25,000+</div>
+          <ul>
+            <li>Framework build plus automated critical journeys</li>
+            <li>Suggested smoke and regression split</li>
+            <li>Failure diagnostics and maintainability review</li>
+            <li>Team walkthrough and improvement roadmap</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="day-rates-title">
+      <h2 id="day-rates-title">Day rates and ongoing support.</h2>
+      <p class="section-intro">
+        Day-rate work is available where a flexible engagement is more suitable than a fixed package, especially for discovery, architecture, mentoring, rescue work, or ongoing delivery support.
+      </p>
+
+      <div class="rate-table" role="table" aria-label="Clearframe day rates">
+        <div class="rate-row" role="row">
+          <strong>Discovery / audit day</strong>
+          <p>Focused review, technical direction, prioritisation, and practical recommendations.</p>
+          <span class="amount">£600/day</span>
+        </div>
+        <div class="rate-row" role="row">
+          <strong>Standard delivery</strong>
+          <p>Automation implementation, framework build-out, QA process support, and practical enablement.</p>
+          <span class="amount">£650/day</span>
+        </div>
+        <div class="rate-row" role="row">
+          <strong>Architecture / strategy</strong>
+          <p>Framework design, CI direction, test strategy, tooling decisions, and senior technical guidance.</p>
+          <span class="amount">£800/day</span>
+        </div>
+        <div class="rate-row" role="row">
+          <strong>Complex / urgent delivery</strong>
+          <p>Regulated environments, rescue engagements, tight deadlines, complex permissions, or multi-team delivery.</p>
+          <span class="amount">By scope</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="retainers-title">
+      <h2 id="retainers-title">Support after the framework is live.</h2>
+      <p class="section-intro">
+        Test automation needs care after launch. Clearframe can provide light-touch review, steady delivery support, or embedded help as your team extends the framework.
+      </p>
+
+      <div class="grid three">
+        <article class="card">
+          <h3>Light support</h3>
+          <div class="price">£750–£1,250 <span>/ month</span></div>
+          <ul>
+            <li>Small fixes and advice</li>
+            <li>Framework review</li>
+            <li>Light maintenance support</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Growth support</h3>
+          <div class="price">£2,000–£3,500 <span>/ month</span></div>
+          <ul>
+            <li>New automated tests</li>
+            <li>Maintenance and CI support</li>
+            <li>Ongoing QA improvements</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Embedded support</h3>
+          <div class="price">£5,000–£8,000 <span>/ month</span></div>
+          <ul>
+            <li>Regular delivery support</li>
+            <li>Mentoring and standards</li>
+            <li>Roadmap and framework ownership</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="scope-title">
+      <h2 id="scope-title">What affects the final quote?</h2>
+      <p class="section-intro">
+        Two applications can both “need automation” while requiring very different levels of effort. Clearframe scopes work carefully so the price reflects the real delivery shape.
+      </p>
+
+      <div class="grid two">
+        <article class="note-panel">
+          <h3>Usually increases scope</h3>
+          <ul>
+            <li>Multiple environments or user roles</li>
+            <li>Complex authentication or permissions</li>
+            <li>Unstable selectors or test data</li>
+            <li>CI/CD integration and reporting needs</li>
+            <li>Large first-pass regression coverage</li>
+          </ul>
+        </article>
+
+        <article class="note-panel">
+          <h3>Usually reduces scope</h3>
+          <ul>
+            <li>Clear critical user journeys</li>
+            <li>Stable test environment and data</li>
+            <li>Good test IDs or reliable selectors</li>
+            <li>Existing release and regression structure</li>
+            <li>A focused first milestone</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-panel" aria-labelledby="cta-title">
+      <div>
+        <h2 id="cta-title">Ready to price the right foundation?</h2>
+        <p>
+          Share the product, the current QA process, and what release confidence needs to look like. Clearframe will shape a practical route from uncertainty to structure.
+        </p>
+      </div>
+      <a class="button primary" href="mailto:shane@clearframesystems.co.uk?subject=Clearframe%20automation%20framework%20quote">Contact Clearframe</a>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Clearframe Systems</span>
+    <a href="mailto:shane@clearframesystems.co.uk">shane@clearframesystems.co.uk</a>
+  </footer>
+</body>
+</html>
